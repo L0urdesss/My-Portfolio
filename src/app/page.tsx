@@ -1,12 +1,19 @@
-"use client"; // Required for Next.js client-side rendering
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
 import { useInView } from "react-intersection-observer";
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
+import { CiLink } from "react-icons/ci";
 import emailjs from '@emailjs/browser';
 import { Snackbar, Alert } from '@mui/material';
 import Image from 'next/image';
+import { FaHtml5, FaCss3Alt, FaNodeJs, FaReact, FaLaravel, FaPython, FaGitAlt } from "react-icons/fa";
+import { IoLogoJavascript } from "react-icons/io";
+import { SiTypescript, SiMysql, SiInertia } from "react-icons/si";
+import { RiTailwindCssFill } from "react-icons/ri";
+import { IoLogoVercel } from "react-icons/io5";
 
 // Custom hook to observe sections
 const useSectionObserver = (setActiveNav: (id: string) => void) => {
@@ -15,7 +22,7 @@ const useSectionObserver = (setActiveNav: (id: string) => void) => {
     const options = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.3, // Adjust this value for smoother transitions
+      threshold: 0.6,
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -52,48 +59,47 @@ const Header = ({
 }) => {
   return (
     <header
-      className={`fixed top-0 left-1/2 transform -translate-x-1/2 w-full md:w-3/4 z-50 ${
+      className={`fixed top-0 left-0 w-full z-50 ${
         darkMode ? "bg-[#18191a] text-white" : "bg-white text-brown-800"
-      } p-4 flex justify-between items-center`}
+      } p-4`}
     >
-      {/* Navigation Links */}
-      <nav className="flex-1 flex justify-center">
-        <ul className="flex space-x-2 md:space-x-5 items-center">
-          {["home", "about", "skills", "projects", "contact"].map((navItem) => (
-            <li key={navItem}>
-              <a
-                href={`#${navItem}`}
-                className={`text-[8px] md:text-[10px] hover:text-brown-600 transition-all duration-300 ${
-                  activeNav === navItem
-                    ? `border-b-1 ${
-                        darkMode ? "border-white text-white" : "border-[#18191a] text-brown-600"
-                      }`
-                    : "border-b-1 border-transparent text-gray-500"
-                }`}
-                onClick={(e) => {
-                  e.preventDefault(); // Prevent default anchor behavior
-                  handleNavClick(navItem); // Handle smooth scroll
-                }}
-              >
-                {navItem.charAt(0).toUpperCase() + navItem.slice(1)}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      {/* Dark Mode Toggle Button */}
-      <div className="flex items-center">
-        <button
-          onClick={toggleDarkMode}
-          className="p-1 transition"
-        >
-          {darkMode ? (
-            <MdOutlineLightMode className="w-4 h-4" />
-          ) : (
-            <MdOutlineDarkMode className="w-4 h-4" />
-          )}
-        </button>
+      <div className="w-full md:w-3/4 max-w-5xl mx-auto flex justify-between items-center">
+        <nav className="flex-1 flex justify-center">
+          <ul className="flex space-x-2 md:space-x-5 items-center">
+            {["home", "about", "education", "projects", "skills", "contact"].map((navItem) => (
+              <li key={navItem}>
+                <a
+                  href={`#${navItem}`}
+                  className={`text-[8px] md:text-[10px] hover:text-brown-600 transition-all duration-300 ${
+                    activeNav === navItem
+                      ? `border-b-1 ${
+                          darkMode ? "border-white text-white" : "border-[#18191a] text-brown-600"
+                        }`
+                      : "border-b-1 border-transparent text-gray-500"
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(navItem);
+                  }}
+                >
+                  {navItem.charAt(0).toUpperCase() + navItem.slice(1)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="flex items-center">
+          <button
+            onClick={toggleDarkMode}
+            className="p-1 transition"
+          >
+            {darkMode ? (
+              <MdOutlineLightMode className="w-4 h-4" />
+            ) : (
+              <MdOutlineDarkMode className="w-4 h-4" />
+            )}
+          </button>
+        </div>
       </div>
     </header>
   );
@@ -103,9 +109,8 @@ export default function Home() {
   const [activeNav, setActiveNav] = useState("home");
   const [darkMode, setDarkMode] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [highlight, setHighlight] = useState(false); // State for highlight effect
+  const [highlight, setHighlight] = useState(false);
 
-  // Use the custom hook to observe sections
   useSectionObserver(setActiveNav);
 
   const handleNavClick = (navItem: string) => {
@@ -116,32 +121,29 @@ export default function Home() {
     setDarkMode(!darkMode);
   };
 
-  // Use useInView for the About section animation
   const { ref: aboutRef, inView: aboutInView } = useInView({
-    triggerOnce: true, // Trigger the animation only once
-    threshold: 0.5, // Trigger when 50% of the section is visible
+    triggerOnce: true,
+    threshold: 0.5,
   });
 
   // EmailJS Integration
-  const form = useRef<HTMLFormElement>(null); // Explicitly type the ref
+  const form = useRef<HTMLFormElement>(null);
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (form.current) {
       emailjs
-        .sendForm('service_r7zbcmr', 'template_23ckq3d', form.current, {
+        .sendForm('service_r7zbcmr', 'template_23ckqq3d', form.current, {
           publicKey: 'NvoEeWkCOqdCVwrhb',
         })
         .then(
           () => {
-            console.log('SUCCESS!');
-            setOpenSnackbar(true); // Open Snackbar on success
-            form.current?.reset(); // Reset the form fields
+            setOpenSnackbar(true);
+            form.current?.reset();
           },
           (error) => {
-            console.log('FAILED...', error.text);
-            alert('Failed to send message. Please try again.'); // Optional: Show error message
+            alert('Failed to send message. Please try again.');
           },
         );
     }
@@ -151,14 +153,35 @@ export default function Home() {
     setOpenSnackbar(false);
   };
 
-  // Trigger the highlight effect
   useEffect(() => {
     const timer = setTimeout(() => {
       setHighlight(true);
-    }, 500); // Delay before highlighting
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Education & Experience Data (sample)
+  const education = [
+    {
+      school: "University of Example",
+      degree: "Bachelor of Science in Computer Science",
+      year: "2019 - 2023",
+      details: "Graduated with honors. Relevant coursework: Algorithms, Data Structures, Software Engineering.",
+    },
+  ];
+  const experience = [
+    {
+      company: "NOAH Business Applications",
+      role: "Business Applications Developer Intern",
+      year: "2022",
+      details: [
+        "Worked on React-based web applications, collaborating closely with designers and backend developers.",
+        "Implemented new features and fixed bugs to improve user experience.",
+        "Participated in code reviews and contributed to team knowledge sharing."
+      ],
+    },
+  ];
 
   return (
     <div className={`w-full p-4 ${darkMode ? "bg-[#18191a] text-white" : "bg-white text-brown-800"}`}>
@@ -169,19 +192,17 @@ export default function Home() {
         toggleDarkMode={toggleDarkMode}
       />
 
-      {/* Add padding-top to compensate for fixed header */}
       <div className="pt-1 md:pt-5">
         {/* Home Section */}
         <section id="home" className="min-h-screen flex flex-col justify-center items-center text-center">
-          {/* Add the round image here */}
-<Image
-  src="/pic.JPG"
-  alt="Maria Lourdes T. Villaruz"
-  width={160}
-  height={160}
-  className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mb-4 border-2 border-gray-200"
-  priority
-/>
+          <Image
+            src="/pic.JPG"
+            alt="Maria Lourdes T. Villaruz"
+            width={160}
+            height={160}
+            className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mb-4 border-2 border-gray-200"
+            priority
+          />
 
           <p className="text-sm md:text-md font-semibold text-brown-400">Hello, I&apos;m </p>
           <h6 className="text-4xl md:text-[50px] font-bold text-brown-600">Maria Lourdes T. Villaruz</h6>
@@ -193,7 +214,6 @@ export default function Home() {
             Continuously exploring new technologies to create seamless and efficient digital experiences.
           </p>
 
-          {/* Add the buttons here */}
           <div className="mt-6 flex flex-wrap justify-center gap-4">
             <a
               href="/RESUME - VILLARUZ.pdf"
@@ -215,7 +235,6 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Add the GitHub icon below the buttons */}
           <div className="mt-6 flex space-x-4">
             <a
               href="https://github.com/L0urdesss"
@@ -244,135 +263,305 @@ export default function Home() {
           </div>
         </section>
 
- <section id="about" className="min-h-screen relative overflow-hidden">
-  {/* Background Text "About Me" */}
-  <h2
-  ref={aboutRef}
-  className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl md:text-[120px] font-bold opacity-10 ${
-    aboutInView ? "slide-in" : ""
-  }`}
-  style={{ color: darkMode ? "#242526" : "#EBEDEF" }} // Change color based on darkMode state
->
-  About Me
-</h2>
-  {/* Content Section */}
-  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row items-center justify-center gap-8 z-10">
-    {/* Text Section */}
-    <div className="text-center md:text-left max-w-lg">
-      {/* Paragraph */}
-      <p className="mt-4 text-brown-400 font-light text-sm md:text-base">
-        &lt; I enjoy exploring new technologies, playing games, and diving into creative projects. Whether it&apos;s coding, discovering new trends, experimenting with tools, or simply learning something new, I love the challenge of{" "}
-        <span className={highlight ? "highlight-text" : ""}>continuous growth and innovation</span>. /&gt;
-      </p>
-    </div>
-  </div>
-</section>
-
-        {/* Skills Section */}
-        <section id="skills" className="min-h-screen flex flex-col justify-center items-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-brown-600">Skills</h2>
-          <p className="mt-4 text-base md:text-lg text-brown-800">This is the skills section.</p>
+        {/* About Section with responsive heading */}
+        <section id="about" className="min-h-screen relative overflow-hidden">
+          <h2
+            ref={aboutRef}
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+              text-3xl sm:text-5xl md:text-6xl lg:text-[120px] font-bold opacity-10 ${
+                aboutInView ? "slide-in" : ""
+              }`}
+            style={{ color: darkMode ? "#242526" : "#EBEDEF" }}
+          >
+            About Me
+          </h2>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row items-center justify-center gap-8 z-10">
+            <div className="text-center md:text-left max-w-lg">
+              <p className="mt-4 text-brown-400 font-light text-sm md:text-base">
+                &lt; I enjoy exploring new technologies, playing games, and diving into creative projects. Whether it&apos;s coding, discovering new trends, experimenting with tools, or simply learning something new, I love the challenge of{" "}
+                <span className={highlight ? "highlight-text" : ""}>continuous growth and innovation</span>. /&gt;
+              </p>
+            </div>
+          </div>
         </section>
 
+        {/* Education & Experience Section */}
+        <section id="education" className="min-h-screen flex flex-col justify-center items-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-brown-600 mb-6">Education &amp; Experience</h2>
+          <div className="w-full max-w-4xl flex flex-col md:flex-row gap-8">
+            {/* Education */}
+            <div className={`flex-1 ${darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"} rounded-lg shadow-md p-6`}>
+              <h3 className="text-xl font-semibold mb-4">Education</h3>
+              {education.map((edu, idx) => (
+                <div key={idx} className="mb-4">
+                  <div className="font-bold">{edu.school}</div>
+                  <div className="text-sm">{edu.degree}</div>
+                  <div className="text-xs text-brown-400">{edu.year}</div>
+                  <div className="text-xs mt-1">{edu.details}</div>
+                </div>
+              ))}
+            </div>
+            {/* Experience */}
+            <div className={`flex-1 ${darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"} rounded-lg shadow-md p-6`}>
+              <h3 className="text-xl font-semibold mb-4">Experience</h3>
+              {experience.map((exp, idx) => (
+                <div key={idx} className="mb-4">
+                  <div className="font-bold">{exp.company}</div>
+                  <div className="text-sm">{exp.role}</div>
+                  <div className="text-xs text-brown-400">{exp.year}</div>
+                  <ul className="text-xs mt-1 space-y-1">
+                    {exp.details.map((detail: string, i: number) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <FaCheck className="text-green-500 mt-0.5 min-w-[14px]" size={12} />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
         {/* Projects Section */}
         <section id="projects" className="min-h-screen flex flex-col justify-center items-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-brown-600">Projects</h2>
-          <p className="mt-4 text-base md:text-lg text-brown-800">This is the projects section.</p>
+          <h2 className="text-3xl md:text-3xl font-bold text-brown-600 mb-8">Projects</h2>
+          <div className="w-full flex flex-wrap justify-center gap-6">
+            {[
+              {
+                title: "TUP Corner (IRS Version 1)",
+                description:
+                  "TUP Corner is an Information Retrieval System that allows users to upload, browse, and search undergraduate research papers at TUP Manila through a simple and user-friendly interface.",
+                github: "https://github.com/Aquiee/Laravel-React-IRS.git",
+                badges: ["React", "Tailwind CSS", "Laravel", "Inertia"],
+              },
+              {
+                title: "TUPScholarly (IRS Version 2)",
+                description:
+                  "TUPScholarly is an Information Retrieval System for managing undergraduate research papers at TUP Manila, featuring automatic tagging, metadata extraction, and an intuitive search interface.",
+                github: "https://github.com/L0urdesss/TUPScholarly.git",
+                badges: ["React", "Tailwind CSS", "Python", "Laravel", "Inertia"],
+              },
+              {
+                title: "KenKen Puzzle Game & Solver",
+                description:
+                  "A Python-based game implementation of the popular KenKen puzzle. KenKen, also known as KenDoku or MathDoku, is a mathematical puzzle game that requires both arithmetic and logical thinking to solve.",
+                github: "https://github.com/L0urdesss/KenKen-Puzzle.git",
+                badges: ["Python"],
+              },
+              {
+                title: "Votify",
+                description:
+                  "Votify is a web-based voting system built with HTML/CSS and PHP, using the Plurality Voting Algorithm to securely and accurately determine winners through a user-friendly interface.",
+                github: "https://github.com/L0urdesss/Voting-System-using-Plurality-Algorithm.git",
+                badges: ["HTML", "CSS", "MySQL"],
+              },
+              {
+                title: "Weather Dashboard",
+                description:
+                  "Weather Dashboard provides real-time weather updates and forecasts for any location, using OpenWeatherMap API.",
+                github: "https://github.com/L0urdesss/weather-dashboard",
+                badges: ["API", "Weather", "React"],
+              },
+              {
+                title: "Expense Splitter",
+                description:
+                  "Expense Splitter helps groups easily split bills and track shared expenses, perfect for trips and group activities.",
+                github: "https://github.com/L0urdesss/expense-splitter",
+                badges: ["Utility", "Finance", "React"],
+              },
+            ].map((project) => (
+              <div
+                key={project.title}
+                className={`
+                  flex flex-col rounded-xl pt-6 pb-2 px-6 w-full max-w-xs min-h-[190px] transition
+                  ${darkMode ? "text-white hover:bg-[#292929]" : "text-brown-800 hover:bg-[#f2f2f2]"}
+                  duration-300
+                  bg-transparent
+                  cursor-pointer
+                `}
+                style={{ boxShadow: "none", border: "none" }}
+              >
+                <div>
+                  <h3 className="text-xs font-bold mb-2">{project.title}</h3>
+                  {/* Description area as flex column */}
+                  <div className="flex flex-col min-h-[120px] relative">
+                    <p className="text-xs font-light">
+                      {project.description}
+                    </p>
+                    {/* Badges */}
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {project.badges.map((badge) => (
+                        <span
+                          key={badge}
+                          className="inline-block px-2 py-0.5 font-semibold rounded-full"
+                          style={{
+                            fontSize: "9px",
+                            backgroundColor: darkMode ? "#f0f0f0" : "#141414",
+                            color: darkMode ? "#18191a" : "#fff",
+                            fontWeight: 600,
+                            letterSpacing: "0.01em",
+                          }}
+                        >
+                          {badge}
+                        </span>
+                      ))}
+                    </div>
+                    {/* View Github link at bottom right inside description */}
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-[10px] font-normal text-brown-600 hover:text-brown-700 transition bg-transparent border-none shadow-none p-0 m-0"
+                      style={{
+                        textDecoration: "none",
+                        boxShadow: "none",
+                        border: "none",
+                        background: "none",
+                        position: "absolute",
+                        right: 0,
+                        bottom: 0,
+                      }}
+                    >
+                      <CiLink className="w-3 h-3" />
+                      View Github
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
-
+        {/* Skills Section */}
+        <section id="skills" className="min-h-screen flex flex-col justify-center items-center">
+          <h2 className="text-xl md:text-2xl font-bold text-brown-600 mb-6">Technologies I Use</h2>
+          <div className="w-full max-w-4xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {[
+              { name: "HTML", icon: FaHtml5 },
+              { name: "CSS", icon: FaCss3Alt },
+              { name: "JavaScript", icon: IoLogoJavascript },
+              { name: "TypeScript", icon: SiTypescript },
+              { name: "NodeJS", icon: FaNodeJs },
+              { name: "React", icon: FaReact },
+              { name: "Tailwind", icon: RiTailwindCssFill },
+              { name: "Laravel", icon: FaLaravel },
+              { name: "Python", icon: FaPython },
+              { name: "MySQL", icon: SiMysql },
+              { name: "Git", icon: FaGitAlt },
+              { name: "GitHub", icon: FaGithub },
+              { name: "Vercel", icon: IoLogoVercel },
+              { name: "Inertia", icon: SiInertia },
+            ].map((skill) => {
+              const IconComponent = skill.icon;
+              return (
+                <div
+                  key={skill.name}
+                  className={`
+                    flex flex-row items-center justify-between rounded-lg
+                    p-4 min-h-[60px] transition
+                    ${darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"}
+                    hover:scale-105 duration-200
+                  `}
+                  style={{
+                    border: darkMode ? "1px solid #333" : "1px solid #e5e7eb",
+                  }}
+                >
+                  <IconComponent
+                    className="w-6 h-6"
+                    style={{
+                      color: darkMode ? "#f0f0f0" : "#18191a",
+                      transition: "color 0.2s"
+                    }}
+                  />
+                  <span className="text-xs font-semibold">{skill.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </section>
         {/* Contact Section */}
         <section id="contact" className="min-h-screen flex flex-col justify-center items-center py-8 ">
           <div className="w-full max-w-4xl flex flex-col md:flex-row items-center justify-between gap-8">
-{/* Map Image and Text */}
-<div className="w-full md:w-1/2 flex flex-col items-start text-left"> {/* Updated classes */}
-  <h2 className="text-3xl md:text-4xl font-bold text-brown-600">Contact Me</h2>
-  {/* Add space between heading and paragraph */}
-  <p className="mt-4 text-sm font-light text-brown-400"> {/* Increased margin-top */}
-    I&apos;m always open to new opportunities, collaborations, or just a friendly chat.  
-    Feel free to reach out, and I&apos;ll get back to you as soon as I can!
-  </p>
-  {/* Add space between paragraph and email/phone number */}
-  <div className="mt-4 text-xs font-extralight text-brown-400 flex gap-4"> {/* Increased margin-top */}
-    <p>villaruzmarialourdes8@gmail.com</p>
-    <p>(+63) 935 273 2945</p>
-  </div>
-  <div className="mt-4 w-full">
-    <Image
-      src={darkMode ? "/map2.png" : "/map1.png"}
-      alt="Map"
-      width={600}
-      height={300}
-      className="w-full h-auto"
-    />
-  </div>
-</div>
-{/* Contact Form */}
-<div className={`w-full md:w-2/5 ${darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"} p-4 md:p-6 rounded-lg shadow-lg`}>
-  <form ref={form} onSubmit={sendEmail} className="space-y-4 p-2">
-    {/* Name Field */}
-    <div>
-      <label htmlFor="user_name" className="block text-xs font-light text-brown-800">Name</label>
-      <input
-        type="text"
-        id="user_name"
-        name="user_name"
-        placeholder="Your Name"
-        className={`mt-1 block w-full px-3 py-1.5 border text-[10px] ${
-          darkMode ? "border-white" : "border-brown-600"
-        } rounded-md ${
-          darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"
-        } focus:ring-brown-600 focus:border-brown-600 focus:shadow-none transition`}
-        required
-      />
-    </div>
-
-    {/* Email Field */}
-    <div>
-      <label htmlFor="user_email" className="block text-xs font-light text-brown-800">Email</label>
-      <input
-        type="email"
-        id="user_email"
-        name="user_email"
-        placeholder="your.email@example.com"
-        className={`mt-1 block w-full px-3 py-1.5 border text-[10px] ${
-          darkMode ? "border-white" : "border-brown-600"
-        } rounded-md ${
-          darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"
-        } focus:ring-brown-600 focus:border-brown-600 focus:shadow-none transition`}
-        required
-      />
-    </div>
-
-    {/* Message Field */}
-    <div>
-      <label htmlFor="message" className="block text-xs font-light text-brown-800">Message</label>
-      <textarea
-        id="message"
-        name="message"
-        rows={3}
-        placeholder="Your message..."
-        className={`mt-1 block w-full px-3 py-1.5 border text-[10px] ${
-          darkMode ? "border-white" : "border-brown-600"
-        } rounded-md ${
-          darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"
-        } focus:ring-brown-600 focus:border-brown-600 focus:shadow-none transition`}
-        required
-      ></textarea>
-    </div>
-
-    {/* Submit Button */}
-    <div className="text-center text-xs">
-      <button
-        type="submit"
-        className={`w-full md:w-3/4 px-4 py-2 mt-2 ${
-          darkMode ? "bg-white text-[#18191a]" : "bg-[#18191a] text-white"
-        } font-semibold rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-600 transition`}
-      >
-        Send Message
-      </button>
-    </div>
-  </form>
-</div>
+            {/* Map Image and Text */}
+            <div className="w-full md:w-1/2 flex flex-col items-start text-left">
+              <h2 className="text-3xl md:text-4xl font-bold text-brown-600">Contact Me</h2>
+              <p className="mt-4 text-sm font-light text-brown-400">
+                I&apos;m always open to new opportunities, collaborations, or just a friendly chat.  
+                Feel free to reach out, and I&apos;ll get back to you as soon as I can!
+              </p>
+              <div className="mt-4 text-xs font-extralight text-brown-400 flex gap-4">
+                <p>villaruzmarialourdes8@gmail.com</p>
+                <p>(+63) 935 273 2945</p>
+              </div>
+              <div className="mt-4 w-full">
+                <Image
+                  src={darkMode ? "/map2.png" : "/map1.png"}
+                  alt="Map"
+                  width={600}
+                  height={300}
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+            {/* Contact Form */}
+            <div className={`w-full md:w-2/5 ${darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"} p-4 md:p-6 rounded-lg shadow-lg`}>
+              <form ref={form} onSubmit={sendEmail} className="space-y-4 p-2">
+                <div>
+                  <label htmlFor="user_name" className="block text-xs font-light text-brown-800">Name</label>
+                  <input
+                    type="text"
+                    id="user_name"
+                    name="user_name"
+                    placeholder="Your Name"
+                    className={`mt-1 block w-full px-3 py-1.5 border text-[10px] ${
+                      darkMode ? "border-white" : "border-brown-600"
+                    } rounded-md ${
+                      darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"
+                    } focus:ring-brown-600 focus:border-brown-600 focus:shadow-none transition`}
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="user_email" className="block text-xs font-light text-brown-800">Email</label>
+                  <input
+                    type="email"
+                    id="user_email"
+                    name="user_email"
+                    placeholder="your.email@example.com"
+                    className={`mt-1 block w-full px-3 py-1.5 border text-[10px] ${
+                      darkMode ? "border-white" : "border-brown-600"
+                    } rounded-md ${
+                      darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"
+                    } focus:ring-brown-600 focus:border-brown-600 focus:shadow-none transition`}
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-xs font-light text-brown-800">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={3}
+                    placeholder="Your message..."
+                    className={`mt-1 block w-full px-3 py-1.5 border text-[10px] ${
+                      darkMode ? "border-white placeholder-brown-400" : "border-brown-600"
+                    } rounded-md ${
+                      darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"
+                    } focus:ring-brown-600 focus:border-brown-600 focus:shadow-none transition`}
+                    required
+                  ></textarea>
+                </div>
+                <div className="text-center text-xs">
+                  <button
+                    type="submit"
+                    className={`w-full md:w-3/4 px-4 py-2 mt-2 ${
+                      darkMode ? "bg-white text-[#18191a]" : "bg-[#18191a] text-white"
+                    } font-semibold rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-600 transition`}
+                  >
+                    Send Message
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </section>
       </div>
