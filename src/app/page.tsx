@@ -142,7 +142,7 @@ export default function Home() {
             setOpenSnackbar(true);
             form.current?.reset();
           },
-          (error) => {
+          () => {
             alert('Failed to send message. Please try again.');
           },
         );
