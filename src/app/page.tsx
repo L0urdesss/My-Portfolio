@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa6";
 import { useInView } from "react-intersection-observer";
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { CiLink } from "react-icons/ci";
@@ -14,6 +13,9 @@ import { IoLogoJavascript } from "react-icons/io";
 import { SiTypescript, SiMysql, SiInertia } from "react-icons/si";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { IoLogoVercel } from "react-icons/io5";
+import { IoIosSchool } from "react-icons/io"; // Add this import
+import { FaBuildingUser } from "react-icons/fa6"; // Add this import
+
 
 // Custom hook to observe sections
 const useSectionObserver = (setActiveNav: (id: string) => void) => {
@@ -161,27 +163,7 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Education & Experience Data (sample)
-  const education = [
-    {
-      school: "University of Example",
-      degree: "Bachelor of Science in Computer Science",
-      year: "2019 - 2023",
-      details: "Graduated with honors. Relevant coursework: Algorithms, Data Structures, Software Engineering.",
-    },
-  ];
-  const experience = [
-    {
-      company: "NOAH Business Applications",
-      role: "Business Applications Developer Intern",
-      year: "2022",
-      details: [
-        "Worked on React-based web applications, collaborating closely with designers and backend developers.",
-        "Implemented new features and fixed bugs to improve user experience.",
-        "Participated in code reviews and contributed to team knowledge sharing."
-      ],
-    },
-  ];
+
 
   return (
     <div className={`w-full p-4 ${darkMode ? "bg-[#18191a] text-white" : "bg-white text-brown-800"}`}>
@@ -284,153 +266,198 @@ export default function Home() {
             </div>
           </div>
         </section>
+<section id="education" className="min-h-screen flex flex-col justify-center items-center">
+  <div className="w-full max-w-4xl flex flex-col md:flex-row gap-8">
 
-        {/* Education & Experience Section */}
-        <section id="education" className="min-h-screen flex flex-col justify-center items-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-brown-600 mb-6">Education &amp; Experience</h2>
-          <div className="w-full max-w-4xl flex flex-col md:flex-row gap-8">
-            {/* Education */}
-            <div className={`flex-1 ${darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"} rounded-lg shadow-md p-6`}>
-              <h3 className="text-xl font-semibold mb-4">Education</h3>
-              {education.map((edu, idx) => (
-                <div key={idx} className="mb-4">
-                  <div className="font-bold">{edu.school}</div>
-                  <div className="text-sm">{edu.degree}</div>
-                  <div className="text-xs text-brown-400">{edu.year}</div>
-                  <div className="text-xs mt-1">{edu.details}</div>
-                </div>
-              ))}
+    {/* Education Timeline */}
+    <div className="flex-1 rounded-lg p-6 flex flex-col">
+      <div className="flex items-center mb-4">
+        <h3 className="text-base font-semibold flex items-center gap-2">
+          <IoIosSchool className="w-5 h-5" />
+          <span className="text-sm">Education</span>
+        </h3>
+      </div>
+      <div className="flex">
+        <div className="text-[10px] text-gray-400 font-mono mr-4 w-20">
+          2021 - 2025
+        </div>
+        <div className="relative flex flex-col items-center mr-4 w-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-brown-600 border-2 border-white z-10"></span>
+          <div className="w-[2px] bg-gray-300 flex-grow min-h-[80px]"></div>
+        </div>
+        <div className="flex flex-col text-xs text-brown-800 dark:text-white">
+          <div className="flex items-start gap-3">
+            {/* Added TUP Logo with Circle Border */}
+            <div className="flex-shrink-0 rounded-full">
+              <img 
+                src="/TUP.png" 
+                alt="Technological University of the Philippines Logo" 
+                className="w-10 h-10 object-cover rounded-full" 
+              />
             </div>
-            {/* Experience */}
-            <div className={`flex-1 ${darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"} rounded-lg shadow-md p-6`}>
-              <h3 className="text-xl font-semibold mb-4">Experience</h3>
-              {experience.map((exp, idx) => (
-                <div key={idx} className="mb-4">
-                  <div className="font-bold">{exp.company}</div>
-                  <div className="text-sm">{exp.role}</div>
-                  <div className="text-xs text-brown-400">{exp.year}</div>
-                  <ul className="text-xs mt-1 space-y-1">
-                    {exp.details.map((detail: string, i: number) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <FaCheck className="text-green-500 mt-0.5 min-w-[14px]" size={12} />
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            <div>
+              <div className="font-semibold mb-1">Technological University of the Philippines</div>
+              <div className="text-[10px] text-gray-400">Bachelor of Science in Computer Science</div>
             </div>
           </div>
-        </section>
-        {/* Projects Section */}
-        <section id="projects" className="min-h-screen flex flex-col justify-center items-center">
-          <h2 className="text-3xl md:text-3xl font-bold text-brown-600 mb-8">Projects</h2>
-          <div className="w-full flex flex-wrap justify-center gap-6">
-            {[
-              {
-                title: "TUP Corner (IRS Version 1)",
-                description:
-                  "TUP Corner is an Information Retrieval System that allows users to upload, browse, and search undergraduate research papers at TUP Manila through a simple and user-friendly interface.",
-                github: "https://github.com/Aquiee/Laravel-React-IRS.git",
-                badges: ["React", "Tailwind CSS", "Laravel", "Inertia"],
-              },
-              {
-                title: "TUPScholarly (IRS Version 2)",
-                description:
-                  "TUPScholarly is an Information Retrieval System for managing undergraduate research papers at TUP Manila, featuring automatic tagging, metadata extraction, and an intuitive search interface.",
-                github: "https://github.com/L0urdesss/TUPScholarly.git",
-                badges: ["React", "Tailwind CSS", "Python", "Laravel", "Inertia"],
-              },
-              {
-                title: "KenKen Puzzle Game & Solver",
-                description:
-                  "A Python-based game implementation of the popular KenKen puzzle. KenKen, also known as KenDoku or MathDoku, is a mathematical puzzle game that requires both arithmetic and logical thinking to solve.",
-                github: "https://github.com/L0urdesss/KenKen-Puzzle.git",
-                badges: ["Python"],
-              },
-              {
-                title: "Votify",
-                description:
-                  "Votify is a web-based voting system built with HTML/CSS and PHP, using the Plurality Voting Algorithm to securely and accurately determine winners through a user-friendly interface.",
-                github: "https://github.com/L0urdesss/Voting-System-using-Plurality-Algorithm.git",
-                badges: ["HTML", "CSS", "MySQL"],
-              },
-              {
-                title: "Weather Dashboard",
-                description:
-                  "Weather Dashboard provides real-time weather updates and forecasts for any location, using OpenWeatherMap API.",
-                github: "https://github.com/L0urdesss/weather-dashboard",
-                badges: ["API", "Weather", "React"],
-              },
-              {
-                title: "Expense Splitter",
-                description:
-                  "Expense Splitter helps groups easily split bills and track shared expenses, perfect for trips and group activities.",
-                github: "https://github.com/L0urdesss/expense-splitter",
-                badges: ["Utility", "Finance", "React"],
-              },
-            ].map((project) => (
-              <div
-                key={project.title}
-                className={`
-                  flex flex-col rounded-xl pt-6 pb-2 px-6 w-full max-w-xs min-h-[190px] transition
-                  ${darkMode ? "text-white hover:bg-[#292929]" : "text-brown-800 hover:bg-[#f2f2f2]"}
-                  duration-300
-                  bg-transparent
-                  cursor-pointer
-                `}
-                style={{ boxShadow: "none", border: "none" }}
-              >
-                <div>
-                  <h3 className="text-xs font-bold mb-2">{project.title}</h3>
-                  {/* Description area as flex column */}
-                  <div className="flex flex-col min-h-[120px] relative">
-                    <p className="text-xs font-light">
-                      {project.description}
-                    </p>
-                    {/* Badges */}
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {project.badges.map((badge) => (
-                        <span
-                          key={badge}
-                          className="inline-block px-2 py-0.5 font-semibold rounded-full"
-                          style={{
-                            fontSize: "9px",
-                            backgroundColor: darkMode ? "#f0f0f0" : "#141414",
-                            color: darkMode ? "#18191a" : "#fff",
-                            fontWeight: 600,
-                            letterSpacing: "0.01em",
-                          }}
-                        >
-                          {badge}
-                        </span>
-                      ))}
-                    </div>
-                    {/* View Github link at bottom right inside description */}
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-[10px] font-normal text-brown-600 hover:text-brown-700 transition bg-transparent border-none shadow-none p-0 m-0"
-                      style={{
-                        textDecoration: "none",
-                        boxShadow: "none",
-                        border: "none",
-                        background: "none",
-                        position: "absolute",
-                        right: 0,
-                        bottom: 0,
-                      }}
-                    >
-                      <CiLink className="w-3 h-3" />
-                      View Github
-                    </a>
-                  </div>
-                </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Experience Timeline */}
+    <div className="flex-1 rounded-lg p-6 flex flex-col">
+      <div className="flex items-center mb-4">
+        <h3 className="text-base font-semibold flex items-center gap-2">
+          <FaBuildingUser className="w-5 h-5" />
+          <span className="text-sm">Experience</span>
+        </h3>
+      </div>
+
+      <div className="flex">
+        <div className="text-[10px] text-gray-400 font-mono mr-4 w-20">
+          Feb 2025 - May 2025
+        </div>
+        
+        <div className="relative flex flex-col items-center mr-4 w-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-brown-600 border-2 border-white z-10"></span>
+          <div className="w-[2px] bg-gray-300 flex-grow min-h-[80px]"></div>
+        </div>
+
+        <div className="flex flex-col text-xs text-brown-800 dark:text-white">
+          <div className="flex items-start gap-3">
+            {/* Enhanced Logo with Circle Border */}
+            <div className="flex-shrink-0 rounded-full">
+              <img 
+                src="/NOAH.png" 
+                alt="NOAH Business Applications Logo" 
+                className="w-10 h-10 object-cover rounded-full" 
+              />
+            </div>
+            
+            <div>
+              <div className="font-semibold mb-1">NOAH Business Applications</div>
+              <div className="text-[10px] text-gray-400">
+                Business Application Developer Intern
               </div>
-            ))}
+            </div>
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    {/* Projects Section */}
+<section id="projects" className="min-h-screen flex flex-col justify-center items-center">
+  <h2 className="text-3xl md:text-3xl font-bold text-brown-600 mb-8">Projects</h2>
+  <div className="w-full max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {[
+      {
+        title: "TUP Corner (IRS Version 1)",
+        description:
+          "TUP Corner is an Information Retrieval System that allows users to upload, browse, and search undergraduate research papers at TUP Manila through a simple and user-friendly interface.",
+        github: "https://github.com/Aquiee/Laravel-React-IRS.git",
+        badges: ["React", "Tailwind CSS", "Laravel", "Inertia"],
+      },
+      {
+        title: "TUPScholarly (IRS Version 2)",
+        description:
+          "TUPScholarly is an Information Retrieval System for managing undergraduate research papers at TUP Manila, featuring automatic tagging, metadata extraction, and an intuitive search interface.",
+        github: "https://github.com/L0urdesss/TUPScholarly.git",
+        badges: ["React", "Tailwind CSS", "Python", "Laravel", "Inertia"],
+      },
+      {
+        title: "KenKen Puzzle Game & Solver",
+        description:
+          "A Python-based game implementation of the popular KenKen puzzle. KenKen, also known as KenDoku or MathDoku, is a mathematical puzzle game that requires both arithmetic and logical thinking to solve.",
+        github: "https://github.com/L0urdesss/KenKen-Puzzle.git",
+        badges: ["Python"],
+      },
+      {
+        title: "Votify",
+        description:
+          "Votify is a web-based voting system built with HTML/CSS and PHP, using the Plurality Voting Algorithm to securely and accurately determine winners through a user-friendly interface.",
+        github: "https://github.com/L0urdesss/Voting-System-using-Plurality-Algorithm.git",
+        badges: ["HTML", "CSS", "MySQL"],
+      },
+      {
+        title: "Weather Dashboard",
+        description:
+          "Weather Dashboard provides real-time weather updates and forecasts for any location, using OpenWeatherMap API.",
+        github: "https://github.com/L0urdesss/weather-dashboard",
+        badges: ["API", "Weather", "React"],
+      },
+      {
+        title: "Expense Splitter",
+        description:
+          "Expense Splitter helps groups easily split bills and track shared expenses, perfect for trips and group activities.",
+        github: "https://github.com/L0urdesss/expense-splitter",
+        badges: ["Utility", "Finance", "React"],
+      },
+      // Add up to 9 projects if needed for a full 3x3 grid
+    ].map((project) => (
+      <div
+        key={project.title}
+        className={`
+          flex flex-col rounded-xl pt-6 pb-2 px-6 w-full min-h-[190px] transition
+          ${darkMode ? "text-white hover:bg-[#292929]" : "text-brown-800 hover:bg-[#f2f2f2]"}
+          duration-300
+          bg-transparent
+          cursor-pointer
+        `}
+        style={{ boxShadow: "none", border: "none" }}
+      >
+        <div>
+          <h3 className="text-xs font-bold mb-2">{project.title}</h3>
+          {/* Description area as flex column */}
+          <div className="flex flex-col min-h-[120px] relative">
+            <p className="text-xs font-light">
+              {project.description}
+            </p>
+            {/* Badges */}
+            <div className="flex flex-wrap gap-1 mt-2">
+              {project.badges.map((badge) => (
+                <span
+                  key={badge}
+                  className="inline-block px-2 py-0.5 font-semibold rounded-full"
+                  style={{
+                    fontSize: "7px", // Reduced from 8px to 7px
+                    backgroundColor: darkMode ? "#f0f0f0" : "#141414",
+                    color: darkMode ? "#18191a" : "#fff",
+                    fontWeight: 600,
+                    letterSpacing: "0.01em",
+                  }}
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+            {/* View Github link at bottom right inside description */}
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-[10px] font-normal text-brown-600 hover:text-brown-700 transition bg-transparent border-none shadow-none p-0 m-0"
+              style={{
+                textDecoration: "none",
+                boxShadow: "none",
+                border: "none",
+                background: "none",
+                position: "absolute",
+                right: 0,
+                bottom: 0,
+              }}
+            >
+              <CiLink className="w-3 h-3" />
+              View Github
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
         {/* Skills Section */}
         <section id="skills" className="min-h-screen flex flex-col justify-center items-center">
           <h2 className="text-xl md:text-2xl font-bold text-brown-600 mb-6">Technologies I Use</h2>
