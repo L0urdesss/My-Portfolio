@@ -315,7 +315,7 @@ export default function Home() {
 
       <div className="flex">
         <div className="text-[10px] text-gray-400 font-mono mr-4 w-20">
-          Feb 2025 - May 2025
+          February 2025 - May 2025
         </div>
         
         <div className="relative flex flex-col items-center mr-4 w-2">
@@ -373,27 +373,6 @@ export default function Home() {
           "A Python-based game implementation of the popular KenKen puzzle. KenKen, also known as KenDoku or MathDoku, is a mathematical puzzle game that requires both arithmetic and logical thinking to solve.",
         github: "https://github.com/L0urdesss/KenKen-Puzzle.git",
         badges: ["Python"],
-      },
-      {
-        title: "Votify",
-        description:
-          "Votify is a web-based voting system built with HTML/CSS and PHP, using the Plurality Voting Algorithm to securely and accurately determine winners through a user-friendly interface.",
-        github: "https://github.com/L0urdesss/Voting-System-using-Plurality-Algorithm.git",
-        badges: ["HTML", "CSS", "MySQL"],
-      },
-      {
-        title: "Weather Dashboard",
-        description:
-          "Weather Dashboard provides real-time weather updates and forecasts for any location, using OpenWeatherMap API.",
-        github: "https://github.com/L0urdesss/weather-dashboard",
-        badges: ["API", "Weather", "React"],
-      },
-      {
-        title: "Expense Splitter",
-        description:
-          "Expense Splitter helps groups easily split bills and track shared expenses, perfect for trips and group activities.",
-        github: "https://github.com/L0urdesss/expense-splitter",
-        badges: ["Utility", "Finance", "React"],
       },
       // Add up to 9 projects if needed for a full 3x3 grid
     ].map((project) => (
