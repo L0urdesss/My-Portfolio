@@ -132,25 +132,26 @@ export default function Home() {
   const form = useRef<HTMLFormElement>(null);
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (form.current) {
-      emailjs
-        .sendForm('service_r7zbcmr', 'template_23ckqq3d', form.current, {
-          publicKey: 'NvoEeWkCOqdCVwrhb',
-        })
-        .then(
-          () => {
-            setOpenSnackbar(true);
-            form.current?.reset();
-          },
-          () => {
-            alert('Failed to send message. Please try again.');
-          },
-        );
-    }
-  };
-
+  if (form.current) {
+    emailjs
+      .sendForm('service_r7zbcmr', 'template_23ckq3d', form.current, {
+        publicKey: 'NvoEeWkCOqdCVwrhb',
+      })
+      .then(
+        (response) => {
+          console.log('SUCCESS!', response);
+          setOpenSnackbar(true);
+          form.current?.reset();
+        },
+        (error) => {
+          console.error('FAILED...', error);
+          alert(`Failed to send: ${error.text || 'Unknown error'}`);
+        },
+      );
+  }
+};
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
@@ -510,7 +511,11 @@ export default function Home() {
             </div>
             {/* Contact Form */}
             <div className={`w-full md:w-2/5 ${darkMode ? "bg-[#242526] text-white" : "bg-white text-brown-800"} p-4 md:p-6 rounded-lg shadow-lg`}>
-              <form ref={form} onSubmit={sendEmail} className="space-y-4 p-2">
+              <form 
+  ref={form} 
+  onSubmit={sendEmail}
+  className="space-y-4 p-2"
+>
                 <div>
                   <label htmlFor="user_name" className="block text-xs font-light text-brown-800">Name</label>
                   <input
@@ -556,15 +561,15 @@ export default function Home() {
                     required
                   ></textarea>
                 </div>
-                <div className="text-center text-xs">
-                  <button
-                    type="submit"
-                    className={`w-full md:w-3/4 px-4 py-2 mt-2 ${
-                      darkMode ? "bg-white text-[#18191a]" : "bg-[#18191a] text-white"
-                    } font-semibold rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-600 transition`}
-                  >
-                    Send Message
-                  </button>
+                 <div className="text-center text-xs">
+    <button
+      type="submit"
+      className={`w-full md:w-3/4 px-4 py-2 mt-2 ${
+        darkMode ? "bg-white text-[#18191a]" : "bg-[#18191a] text-white"
+      } font-semibold rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-600 transition`}
+    >
+      Send Message
+    </button>
                 </div>
               </form>
             </div>
