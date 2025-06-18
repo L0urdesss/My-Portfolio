@@ -199,7 +199,7 @@ export default function Home() {
 
           <div className="mt-6 flex flex-wrap justify-center gap-4">
             <a
-              href="/RESUME - VILLARUZ.pdf"
+              href="/RESUME-VILLARUZ.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className={`px-4 py-2 md:px-5 md:py-2 ${
@@ -338,7 +338,7 @@ export default function Home() {
             <div>
               <div className="font-semibold mb-1">NOAH Business Applications</div>
               <div className="text-[10px] text-gray-400">
-                Business Application Developer Intern
+                Business Applications Developer Intern
               </div>
             </div>
           </div>
