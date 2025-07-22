@@ -298,7 +298,8 @@ export default function Home() {
             </div>
             <div>
               <div className="font-semibold mb-1">Technological University of the Philippines</div>
-              <div className="text-[10px] text-gray-400">Bachelor of Science in Computer Science - Cum Laude</div>
+              <div className="text-[10px] text-gray-400">Bachelor of Science in Computer Science</div>
+              <div className="text-[10px] text-gray-400">Cum Laude</div>
             </div>
           </div>
         </div>
