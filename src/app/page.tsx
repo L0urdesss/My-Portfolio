@@ -376,6 +376,28 @@ export default function Home() {
         github: "https://github.com/L0urdesss/KenKen-Puzzle.git",
         badges: ["Python"],
       },
+      {
+        title: "Mabaya - Flowering Object Detection App",
+        description:
+          "Mabaya is a mobile application developed in Java (Android Studio) that uses a YOLOv5 model (converted into TensorFlow Lite) to detect and recognize 5 types of flowers.",
+        github: "https://github.com/L0urdesss/Mabaya.git",
+        badges: ["Java"],
+      },
+      {
+        title: "Votify",
+        description:
+          "A simple web-based voting system built with HTML/CSS for the frontend and PHP for the backend. The system uses the Plurality Algorithm to count votes.",
+        github: "https://github.com/L0urdesss/Votify---Voting-System-using-Plurality-Algorithm.git",
+        badges: ["HTML, CSS, PHP"],
+      },
+      {
+        title: "Arithmetic Practice Game in C (with Countdown Timer)",
+        description:
+          "This project is a C-based interactive math quiz game using arrays of structures, enhanced with a countdown timer per question for added challenge and engagement.",
+        github: "https://github.com/L0urdesss/Arithmetic-Practice-Game-in-C-with-Countdown-Timer.git",
+        badges: ["C"],
+      },
+      
       // Add up to 9 projects if needed for a full 3x3 grid
     ].map((project) => (
       <div
