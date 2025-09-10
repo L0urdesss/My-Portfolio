@@ -377,18 +377,18 @@ export default function Home() {
         badges: ["Python"],
       },
       {
-        title: "Mabaya - Flowering Object Detection App",
+        title: "Mabaya - Flower Object Detection App",
         description:
           "Mabaya is a mobile application developed in Java (Android Studio) that uses a YOLOv5 model (converted into TensorFlow Lite) to detect and recognize 5 types of flowers.",
         github: "https://github.com/L0urdesss/Mabaya.git",
         badges: ["Java"],
       },
       {
-        title: "Votify",
+        title: "Votify - Voting System using Plurality Algorithm",
         description:
           "A simple web-based voting system built with HTML/CSS for the frontend and PHP for the backend. The system uses the Plurality Algorithm to count votes.",
         github: "https://github.com/L0urdesss/Votify---Voting-System-using-Plurality-Algorithm.git",
-        badges: ["HTML, CSS, PHP"],
+        badges: ["HTML", "CSS", "PHP"],
       },
       {
         title: "Arithmetic Practice Game in C (with Countdown Timer)",
